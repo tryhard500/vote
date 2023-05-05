@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Голосование</title>
+
+  <!-- Стили -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/index.css" />
+
+  <!-- Скрипты -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="js/index.js" defer></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+        Голосования
+      </a>
+    </div>
+  </nav>
+
+  <main class="container mt-5">
+    <div class="row">
+
+      <!-- Голосования -->
+      <div class="col">
+        <div class="container">
+          <h1>Текущие голосования</h1>
+          <hr class="mb-5">
+
+          <div class="votes-container">
+            <!-- Здесь будут голосования -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Форма создания -->
+      <div class="col">
+        <div class="container">
+          <h1>Открыть голосование</h1>
+          <hr class="mb-3">
+
+          <form id="send-data">
+            <div class="mb-3">
+              <label class="form-label">Заголовок</label>
+              <input type="text" class="form-control" name="title">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Текст описания</label>
+              <textarea class="form-control" rows="5" name="description"></textarea>
+            </div>
+            <button type="submit" class="btn btn-outline-success">
+              Открыть голосование
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</body>
+
+</html>

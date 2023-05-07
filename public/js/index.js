@@ -69,7 +69,7 @@ function renderVotes() {
     // 5. Повесь обработчики событий
     activateClicks();
     VotesPositive();
-    VotesPositive();
+    VotesNegative();
 }
 
 function activateForm() {
@@ -102,18 +102,14 @@ function activateClicks() {
 
 function VotesPositive() {
     let positiveButtons = document.querySelectorAll(`.vote-positive`);
-    console.log('1');
     for (let i = 0; i < positiveButtons.length; i++){
         let button = positiveButtons[i];
         let vote = VOTES[i];
-        console.log(vote);
         button.addEventListener('click',async ()=>{
             let response = await axios.post('/votes/positive',{
                 id: vote._id
             });
-            console.log(vote.positive);
-            vote.positive++;
-            console.log(vote.positive);
+            VOTES[i].positive++;
             renderVotes();
         });
     }
@@ -129,7 +125,7 @@ function VotesNegative() {
             let response = await axios.post('/votes/negative',{
                 id: vote._id
             });
-            vote.negative++;
+            VOTES[i].negative++;
             renderVotes();
         });
     }

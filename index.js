@@ -58,14 +58,16 @@ app.post('/votes/remove', async (req, res) => {
 
 app.post('/votes/positive', async (req, res) => {
     let id = req.body.id;
-    let vote = await Vote.find({ _id: id });
+    let vote = await Vote.findOne({ _id: id });
     vote.positive++;
     await vote.save();
+    res.send(vote);
 });
 
 app.post('/votes/negative', async (req, res) => {
     let id = req.body.id;
-    let vote = await Vote.find({ _id: id });
+    let vote = await Vote.findOne({ _id: id });
     vote.negative++;
     await vote.save();
+    res.send(vote);
 });

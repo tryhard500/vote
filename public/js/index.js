@@ -68,8 +68,6 @@ function renderVotes() {
 
     // 5. Повесь обработчики событий
     activateClicks();
-    VotesPositive();
-    VotesNegative();
 }
 
 function activateForm() {
@@ -85,47 +83,33 @@ function activateForm() {
 }
 
 function activateClicks() {
-    let removeButtons = document.querySelectorAll(`.vote-remove`);
-    for (let i = 0; i < removeButtons.length; i++){
-        let button = removeButtons[i];
+    let voteNodes = document.querySelectorAll(`.vote`);
+    for (let i = 0; i < voteNodes.length; i++){
+        let node = voteNodes[i];
         let vote = VOTES[i];
-        button.addEventListener('click',async ()=>{
+        let removeButton = node.querySelector('.vote-remove');
+        let positiveButton = node.querySelector('.vote-positive');
+        let negativeButtin = node.querySelector('.vote-negative');
+
+        positiveButton.addEventListener('click',async ()=>{
+            let response = await axios.post('/votes/positive',{
+                id: vote._id
+            });
+            loadVotes()
+        });
+
+        negativeButtin.addEventListener('click',async ()=>{
+            let response = await axios.post('/votes/negative',{
+                id: vote._id
+            });
+            loadVotes()
+        });
+
+        removeButton.addEventListener('click',async ()=>{
             let response = await axios.post('/votes/remove',{
                 id: vote._id
             });
             VOTES.splice(i,1);
-            renderVotes();
-        });
-    }
-}
-
-
-function VotesPositive() {
-    let positiveButtons = document.querySelectorAll(`.vote-positive`);
-    for (let i = 0; i < positiveButtons.length; i++){
-        let button = positiveButtons[i];
-        let vote = VOTES[i];
-        button.addEventListener('click',async ()=>{
-            let response = await axios.post('/votes/positive',{
-                id: vote._id
-            });
-            VOTES[i].positive++;
-            renderVotes();
-        });
-    }
-}
-
-
-function VotesNegative() {
-    let positiveButtons = document.querySelectorAll(`.vote-negative`);
-    for (let i = 0; i < positiveButtons.length; i++){
-        let button = positiveButtons[i];
-        let vote = VOTES[i];
-        button.addEventListener('click',async ()=>{
-            let response = await axios.post('/votes/negative',{
-                id: vote._id
-            });
-            VOTES[i].negative++;
             renderVotes();
         });
     }
